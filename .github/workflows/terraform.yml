@@ -1,0 +1,22 @@
+name: 'format check'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [ main ]
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: 'us-east-1'
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Format'
+        uses: hashicorp/terraform-github-actions@7881bd794c37e7670d8cf9fc954e03f8f7c778fa
+        with:
+          tf_actions_version: 0.14.2
+          tf_actions_subcommand: 'fmt'
+          tf_actions_working_dir: '.'
